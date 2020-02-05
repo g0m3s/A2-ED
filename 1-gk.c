@@ -61,19 +61,33 @@ void inserir(PILHA *duracell, int valor){
 
 void remover(PILHA *duracell, int valor){ 
 
-    CELULA *auxiliar;
+    CELULA *auxiliar, *auxiliar2;
 
     if(!(duracell  ->inicio == NULL)){
 
         auxiliar  = duracell ->inicio;
 
+        if ( duracell  ->inicio  == duracell  ->topo ){
+
+            free(auxiliar);
+            duracell  ->inicio = NULL;
+            duracell  ->topo = NULL;
+
+        }
+
         do{
         
         if( auxiliar  ->valor == valor){
 
-            auxiliar->valor = 0;
-            free(auxiliar); //acho que agora tem que ligar o anterior a outro proximo
-            printf("\nO valor foi excluido!\n");
+            auxiliar2 = duracell  ->topo;
+
+            duracell ->topo = auxiliar;
+
+            duracell  ->topo  ->proximo = NULL;
+
+            free(auxiliar2);
+
+            
 
         }else
 

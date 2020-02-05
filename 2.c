@@ -11,6 +11,9 @@ d) Consultar se uma carta está na pilha.
 e) Embaralhar as cartas da pilha. 
 */
 
+//NO REMOVER, UM OUTRO AUXILIAR VAI RECEBER O END. DO QUE DEVE SER REMOVIDO E SUBSTITUIR ELE COM O DO TOPO E ENTAO DAR FREE NO TOPOO E FAZER ELE APONTANDO PRA NULL
+
+
 struct carta {
 
     char naipe[2];
@@ -58,7 +61,7 @@ void insere(PILHA *duracell, char naipe[2] ){
 
 }
 
-
+/*
 void remove(PILHA *duracell, char naipe[2] ){
 
     CARTA *auxiliar;
@@ -85,17 +88,46 @@ void remove(PILHA *duracell, char naipe[2] ){
         printf("\nImpossivel remover qualquer item pois a pilha esta vazia!\n");
 
 }
-
+*/
 
 void exibeTopo(PILHA *duracell){
 
     if (!(duracell  ->inicio == NULL)){
 
-        printf("\ nA carta do topo e %s ", duracell->topo->naipe);
+        printf("\n nA carta do topo e %s ", duracell->topo->naipe);
 
     }else
 
         printf("A pilha esta vazia!");
+
+}
+
+void consulta(PILHA *duracell, char naipe[2]){
+
+    CARTA * auxiliar;
+
+    auxiliar = duracell  ->inicio;
+
+    while(!(auxiliar == duracell->topo)){
+
+        if( strcmp(auxiliar->naipe , naipe) == 0 ){
+
+            printf("\n Esta na pilha!\n");
+            return;
+
+        }else
+
+            auxiliar = auxiliar->proximo;
+
+    }
+
+    printf("Nao esta na pilha! ");
+
+}
+
+void embaralha (PILHA *duracell){
+
+    
 
 }
 
@@ -114,6 +146,8 @@ int main(){
         printf("\n 1 - PARA INSERIR UMA CARTA\n");
         printf("\n 2 - PARA REMOVER UMA CARTA\n");
         printf("\n 3 - PARA EXIBIR A CARTA QUE ESTA NO TOPO DA PILHA\n");
+        printf("\n 4 - PARA VERIFICAR SE A CARTA ESTA NA PILHA\n");
+        printf("\n 4 - PARA EMBARALHAR AS CARTAS DA PILHA\n");        
         printf(" 0 - PARA SAIR\n");
         printf("\n");
         printf(" Sua escolha: ");
@@ -130,16 +164,28 @@ int main(){
         break;
 /*
         case 2:
-
             printf("Informe a carta a ser removida: ");
             scanf(" %s", nNaipe);
             remove(&duracell, nNaipe);
-
         break;
 */
         case 3:
 
             exibeTopo(&duracell);
+
+        break;
+
+        case 4:
+
+            consulta(&duracell, nNaipe);
+
+        break;
+
+        case 5:
+
+            embaralha(&duracell);
+
+        break;
 
         default:
 
